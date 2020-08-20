@@ -110,10 +110,10 @@ class AlbumViewModel: NSObject {
         
     }
     
-    func addAlbumToCart(_ indexpath: IndexPath, handler: @escaping ()-> Void) {
-        var album = self.arrAlbum[indexpath.row]
+    func addAlbumToCart(_ index: Int, handler: @escaping ()-> Void) {
+        var album = self.arrAlbum[index]
         album.isSelected = !(album.isSelected ?? false)
-        self.arrAlbum[indexpath.row] = album
+        self.arrAlbum[index] = album
         if let indexValue = self.arrMainAlbum.firstIndex(where:{$0.trackId == album.trackId}) {
             var mainAlbum = self.arrMainAlbum[indexValue]
             mainAlbum.isSelected = album.isSelected

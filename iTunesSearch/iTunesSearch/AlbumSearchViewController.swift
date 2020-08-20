@@ -78,13 +78,15 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellAlbum", for: indexPath) as! CellAlbum
+        cell.btnSelect.tag = indexPath.row
+        cell.btnSelect.addTarget(self, action: #selector(addItemToCart(_:)), for: .touchUpInside)
         cell.setUpView(albumViewModel, indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.albumViewModel.addAlbumToCart(indexPath) {
-            self.tableViewAlbum.reloadRows(at: [indexPath], with: .automatic)
+        self.albumViewModel.addAlbumToCart(indexPath.row) {
+            self.tableViewAlbum.reloadRows(at: [indexPath], with: .none)
         }
     }
     
@@ -157,6 +159,7 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
         
     }
     
+    //MARK:- Goto Cart View
     @IBAction func cartButtonAction(_ sender: UIButton) {
         self.albumViewModel.gotoCartView(self)
     }
@@ -168,6 +171,12 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
         }
     }
     
+    //MARK:- Add Item To Cart
+    @objc func addItemToCart(_ sender: UIButton) {
+        self.albumViewModel.addAlbumToCart(sender.tag) {
+            self.tableViewAlbum.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
+        }
+    }
 
 }
 
