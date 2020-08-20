@@ -14,6 +14,7 @@ struct ResultModel: Codable {
 }
 
 struct Album: Codable, Hashable {
+    var trackId: Int
     var artistName: String
     var collectionName: String?
     var trackName: String
@@ -21,6 +22,7 @@ struct Album: Codable, Hashable {
     var collectionPrice: Float
     var currency: String
     var releaseDate: String
+    var isSelected: Bool?
 }
 
 class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
@@ -28,6 +30,8 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
     @IBOutlet weak var searchBarAlbum: UISearchBar!
     @IBOutlet weak var tableViewAlbum: UITableView!
     @IBOutlet weak var loader: UIActivityIndicatorView!
+    @IBOutlet weak var btnSort: UIButton!
+    @IBOutlet weak var btnCart: UIButton!
     
     var albumViewModel = AlbumViewModel()
     
@@ -54,6 +58,21 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(checkCartDelete), name: .cartDelete, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .cartDelete, object: nil)
+    }
+    
+    //MARK:- Check Cart Zero
+    @objc func checkCartDelete() {
+        
+    }
 
     //MARK:- TableView DataSource & Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,6 +83,12 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "CellAlbum", for: indexPath) as! CellAlbum
         cell.setUpView(albumViewModel, indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.albumViewModel.addAlbumToCart(indexPath) {
+            self.tableViewAlbum.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,6 +158,10 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
             
         self.present(sortMenu, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func cartButtonAction(_ sender: UIButton) {
+        self.albumViewModel.gotoCartView(self)
     }
     
     //MARK:- Reload Table

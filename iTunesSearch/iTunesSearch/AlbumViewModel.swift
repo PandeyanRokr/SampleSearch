@@ -15,6 +15,10 @@ class AlbumViewModel: NSObject {
     var arrMainAlbum = [Album]()
     var lastSorted:SORTBY?
     
+    override init() {
+        
+    }
+    
     func fetchAlbum(_ handler: @escaping ([Album]?)-> Void) {
         let appRequest = AppRequest()
         let headerParam = ["Content-Type":"application/json"]
@@ -47,7 +51,7 @@ class AlbumViewModel: NSObject {
             if let model = self.resultModel {
                 var albumSet = Set<Album>()
                 albumSet = Set(model.results)
-                self.arrMainAlbum = Array(albumSet)
+                self.arrMainAlbum = Array(albumSet).sorted(by: {$0.releaseDate < $1.releaseDate})
                 self.arrAlbum = self.arrMainAlbum
                 print(arrMainAlbum.count)
             }
@@ -105,5 +109,38 @@ class AlbumViewModel: NSObject {
         }
         
     }
+    
+    func addAlbumToCart(_ indexpath: IndexPath, handler: @escaping ()-> Void) {
+        var album = self.arrAlbum[indexpath.row]
+        album.isSelected = !(album.isSelected ?? false)
+        self.arrAlbum[indexpath.row] = album
+        if let indexValue = self.arrMainAlbum.firstIndex(where:{$0.trackId == album.trackId}) {
+            var mainAlbum = self.arrMainAlbum[indexValue]
+            mainAlbum.isSelected = album.isSelected
+            self.arrMainAlbum[indexValue] = mainAlbum
+        }
+        handler()
+    }
+    
+    func gotoCartView(_ context: UIViewController) {
+        let arrSelected = self.arrAlbum.filter({$0.isSelected == true})
+        if (arrSelected.count > 0) {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+            vc.cartViewModel.arrAlbum = arrSelected
+            vc.cartViewModel.currency = self.arrAlbum.first!.currency
+            context.navigationController!.pushViewController(vc, animated: true)
+        }else {
+            DispatchQueue.main.async {
+                let alertView = UIAlertController(title: "", message: "Please select albums to cart.", preferredStyle: .alert)
+                let btnDismiss = UIAlertAction(title: "OK", style: .default) { (action) in
+                    alertView.dismiss(animated: true, completion: nil)
+                }
+                alertView.addAction(btnDismiss)
+                context.present(alertView, animated: true, completion: nil)
+            }
+        }
+        
+    }
+    
     
 }

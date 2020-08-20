@@ -1,14 +1,14 @@
 //
-//  CellAlbum.swift
+//  CellAlbumCart.swift
 //  iTunesSearch
 //
-//  Created by Pandeyan Rokr on 2020-08-19.
+//  Created by Pandeyan Rokr on 2020-08-20.
 //  Copyright © 2020 Razor. All rights reserved.
 //
 
 import UIKit
 
-class CellAlbum: UITableViewCell {
+class CellAlbumCart: UITableViewCell {
     
     @IBOutlet weak var imgViewAlbum: UIImageView!
     @IBOutlet weak var lblArtistName: UILabel!
@@ -16,10 +16,10 @@ class CellAlbum: UITableViewCell {
     @IBOutlet weak var lblCollectionName: UILabel!
     @IBOutlet weak var lblReleaseDate: UILabel!
     @IBOutlet weak var lblPrice: UILabel!
-    @IBOutlet weak var btnSelect: UIButton!
-    
-    let dateFormatter = DateFormatter()
+    @IBOutlet weak var btnDelete: UIButton!
 
+    let dateFormatter = DateFormatter()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,26 +31,24 @@ class CellAlbum: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setUpView(_ albumViewModel: AlbumViewModel, _ indexPath: IndexPath) {
-        lblArtistName.text = albumViewModel.arrAlbum[indexPath.row].artistName
-        lblCollectionName.text = albumViewModel.arrAlbum[indexPath.row].collectionName ?? ""
-        lblTrackName.text = albumViewModel.arrAlbum[indexPath.row].trackName
-        let imgSelected = albumViewModel.arrAlbum[indexPath.row].isSelected ?? false ? "icon_tick_box" : "icon_box"
-        btnSelect.setImage(UIImage(named: imgSelected), for: .normal)
+    func setUpCartView(_ cartViewModel: CartViewModel, _ indexPath: IndexPath) {
+        lblArtistName.text = cartViewModel.arrAlbum[indexPath.row].artistName
+        lblCollectionName.text = cartViewModel.arrAlbum[indexPath.row].collectionName ?? ""
+        lblTrackName.text = cartViewModel.arrAlbum[indexPath.row].trackName
         
-        let releaseDate = albumViewModel.arrAlbum[indexPath.row].releaseDate
+        let releaseDate = cartViewModel.arrAlbum[indexPath.row].releaseDate
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
         let dateObj = dateFormatter.date(from: releaseDate)
         dateFormatter.dateFormat = "dd/MM/yyyy"
         let date = dateFormatter.string(from: dateObj!)
         lblReleaseDate.text = date
-        let priceValue: Float = albumViewModel.arrAlbum[indexPath.row].collectionPrice
-        let currency = albumViewModel.arrAlbum[indexPath.row].currency
+        let priceValue: Float = cartViewModel.arrAlbum[indexPath.row].collectionPrice
+        let currency = cartViewModel.arrAlbum[indexPath.row].currency
         let price = "\(priceValue)" + " " + currency
         lblPrice.text = price
         
-        let imgURL = albumViewModel.arrAlbum[indexPath.row].artworkUrl100
+        let imgURL = cartViewModel.arrAlbum[indexPath.row].artworkUrl100
         
         if let cachedImage = APP_MANAGER.imageCache.object(forKey: imgURL as NSString) {
             self.imgViewAlbum.image = cachedImage

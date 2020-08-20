@@ -22,6 +22,7 @@ enum REQUEST_TYPE:String {
 
 extension Notification.Name {
     static let networkStatus = Notification.Name("network_status")
+    static let cartDelete = Notification.Name("cart_delete")
 }
 
 enum SORTBY {

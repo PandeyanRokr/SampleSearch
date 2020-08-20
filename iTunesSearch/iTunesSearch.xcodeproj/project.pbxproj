@@ -27,6 +27,12 @@
 		D25CE35624ED1CAC007CAAF4 /* AppRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25CE35524ED1CAC007CAAF4 /* AppRequest.swift */; };
 		D25CE35724ED1CAC007CAAF4 /* AppRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25CE35524ED1CAC007CAAF4 /* AppRequest.swift */; };
 		D25CE35824ED6283007CAAF4 /* CellAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25CE34924ED0AAD007CAAF4 /* CellAlbum.swift */; };
+		D26947CA24EEAD5400823E0E /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26947C924EEAD5400823E0E /* CartViewController.swift */; };
+		D26947CB24EEAD5400823E0E /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26947C924EEAD5400823E0E /* CartViewController.swift */; };
+		D26947CD24EEAF1400823E0E /* CellAlbumCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26947CC24EEAF1400823E0E /* CellAlbumCart.swift */; };
+		D26947CE24EEAF1400823E0E /* CellAlbumCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26947CC24EEAF1400823E0E /* CellAlbumCart.swift */; };
+		D26947D024EEBC4C00823E0E /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26947CF24EEBC4C00823E0E /* CartViewModel.swift */; };
+		D26947D124EEBC4C00823E0E /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26947CF24EEBC4C00823E0E /* CartViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,9 @@
 		D25CE34F24ED1ACF007CAAF4 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		D25CE35224ED1B18007CAAF4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D25CE35524ED1CAC007CAAF4 /* AppRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRequest.swift; sourceTree = "<group>"; };
+		D26947C924EEAD5400823E0E /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		D26947CC24EEAF1400823E0E /* CellAlbumCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellAlbumCart.swift; sourceTree = "<group>"; };
+		D26947CF24EEBC4C00823E0E /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +131,9 @@
 				D25CE31724ED03DD007CAAF4 /* AlbumSearchViewController.swift */,
 				D25CE34924ED0AAD007CAAF4 /* CellAlbum.swift */,
 				D25CE34C24ED18D4007CAAF4 /* AlbumViewModel.swift */,
+				D26947C924EEAD5400823E0E /* CartViewController.swift */,
+				D26947CC24EEAF1400823E0E /* CellAlbumCart.swift */,
+				D26947CF24EEBC4C00823E0E /* CartViewModel.swift */,
 				D25CE34F24ED1ACF007CAAF4 /* AppManager.swift */,
 				D25CE35224ED1B18007CAAF4 /* Constants.swift */,
 				D25CE35524ED1CAC007CAAF4 /* AppRequest.swift */,
@@ -283,12 +295,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26947D024EEBC4C00823E0E /* CartViewModel.swift in Sources */,
 				D25CE35024ED1ACF007CAAF4 /* AppManager.swift in Sources */,
 				D25CE35624ED1CAC007CAAF4 /* AppRequest.swift in Sources */,
+				D26947CA24EEAD5400823E0E /* CartViewController.swift in Sources */,
 				D25CE34D24ED18D4007CAAF4 /* AlbumViewModel.swift in Sources */,
 				D25CE31824ED03DD007CAAF4 /* AlbumSearchViewController.swift in Sources */,
 				D25CE34A24ED0AAD007CAAF4 /* CellAlbum.swift in Sources */,
 				D25CE31424ED03DD007CAAF4 /* AppDelegate.swift in Sources */,
+				D26947CD24EEAF1400823E0E /* CellAlbumCart.swift in Sources */,
 				D25CE31624ED03DD007CAAF4 /* SceneDelegate.swift in Sources */,
 				D25CE31E24ED03DD007CAAF4 /* iTunesSearch.xcdatamodeld in Sources */,
 				D25CE35324ED1B18007CAAF4 /* Constants.swift in Sources */,
@@ -301,8 +316,11 @@
 			files = (
 				D25CE35424ED1B18007CAAF4 /* Constants.swift in Sources */,
 				D25CE35724ED1CAC007CAAF4 /* AppRequest.swift in Sources */,
+				D26947CE24EEAF1400823E0E /* CellAlbumCart.swift in Sources */,
 				D25CE34E24ED18D4007CAAF4 /* AlbumViewModel.swift in Sources */,
 				D25CE34B24ED0AB2007CAAF4 /* AlbumSearchViewController.swift in Sources */,
+				D26947CB24EEAD5400823E0E /* CartViewController.swift in Sources */,
+				D26947D124EEBC4C00823E0E /* CartViewModel.swift in Sources */,
 				D25CE32E24ED03DE007CAAF4 /* iTunesSearchTests.swift in Sources */,
 				D25CE35824ED6283007CAAF4 /* CellAlbum.swift in Sources */,
 				D25CE35124ED1ACF007CAAF4 /* AppManager.swift in Sources */,
