@@ -33,10 +33,6 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-    }
-    
     //MARK:- TableView DataSource & Delegates
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartViewModel.arrAlbum.count

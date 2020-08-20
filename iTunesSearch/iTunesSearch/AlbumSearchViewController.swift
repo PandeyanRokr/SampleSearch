@@ -64,14 +64,11 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
         NotificationCenter.default.addObserver(self, selector: #selector(checkCartDelete), name: .cartDelete, object: nil)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: .cartDelete, object: nil)
-    }
-    
     //MARK:- Check Cart Zero
-    @objc func checkCartDelete() {
-        
+    @objc func checkCartDelete(_ notification:Notification) {
+        let trackId = notification.userInfo![KEY_TRACK_ID] as! Int
+        self.albumViewModel.updateAlbumCart(trackId)
+        self.tableViewAlbum.reloadData()
     }
 
     //MARK:- TableView DataSource & Delegates

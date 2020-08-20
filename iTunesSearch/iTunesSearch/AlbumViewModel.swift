@@ -142,5 +142,18 @@ class AlbumViewModel: NSObject {
         
     }
     
+    func updateAlbumCart(_ idValue: Int) {
+        var album = self.arrAlbum.filter({$0.trackId == idValue}).first!
+        album.isSelected = false
+        if let index = self.arrAlbum.firstIndex(where:{$0.trackId == album.trackId}) {
+            self.arrAlbum[index] = album
+        }
+        
+        if let indexValue = self.arrMainAlbum.firstIndex(where:{$0.trackId == album.trackId}) {
+            var mainAlbum = self.arrMainAlbum[indexValue]
+            mainAlbum.isSelected = album.isSelected
+            self.arrMainAlbum[indexValue] = mainAlbum
+        }
+    }
     
 }

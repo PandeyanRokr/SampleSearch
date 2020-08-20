@@ -11,6 +11,7 @@ import UIKit
 
 let APP_MANAGER = AppManager.shared
 let KEY_NETWORK_DISCONNECTED = "network_disconnected"
+let KEY_TRACK_ID = "trackId"
 
 
 enum REQUEST_TYPE:String {

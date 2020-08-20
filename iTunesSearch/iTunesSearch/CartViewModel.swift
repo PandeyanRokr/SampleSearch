@@ -20,7 +20,9 @@ class CartViewModel: NSObject {
     }
     
     func removeItemFromCart(index: Int, completion: @escaping(Int,Float)->Void) {
+        let trackId = arrAlbum[index].trackId
         arrAlbum.remove(at: index)
+        NotificationCenter.default.post(name: .cartDelete, object: nil, userInfo: [KEY_TRACK_ID:trackId])
         self.getPriceAndCount { (itemsCount, priceValue) in
             completion(itemsCount, priceValue)
         }
