@@ -34,6 +34,9 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        tableViewAlbum.estimatedRowHeight = UITableView.automaticDimension
+        tableViewAlbum.rowHeight = UITableView.automaticDimension
+        tableViewAlbum.tableFooterView = UIView()
         searchBarAlbum.showsCancelButton = true
         self.loader.startAnimating()
         albumViewModel.fetchAlbum { (albumArray) in
@@ -42,6 +45,11 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
                     self.loader.stopAnimating()
                     self.loader.isHidden = true
                     self.tableViewAlbum.reloadData()
+                }
+            }else {
+                DispatchQueue.main.async {
+                    self.loader.stopAnimating()
+                    self.loader.isHidden = true
                 }
             }
         }
@@ -59,7 +67,7 @@ class AlbumSearchViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 117.0
+        return UITableView.automaticDimension
     }
     
     //MARK:- Search Bar Delegate
